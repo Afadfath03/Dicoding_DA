@@ -38,11 +38,16 @@ min_date = all_df["date"].min()
 max_date = all_df["date"].max()
 
 with st.sidebar:
-    start_date, end_date = st.date_input(
-        "Select Date Range",
+    start_date= st.date_input(
+        "Select Minimal Date Range",
         min_value=min_date,
+        value=[min_date],
+    )
+    
+    end_date= st.date_input(
+        "Select Maximal Date Range",
         max_value=max_date,
-        value=[min_date, max_date],
+        value=[max_date],
     )
 
 if(start_date is None) or (end_date is None):
