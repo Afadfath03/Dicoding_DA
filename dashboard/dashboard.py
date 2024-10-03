@@ -7,9 +7,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
+data = "all_data.csv"
+
 sns.set_theme(style="dark")
 
-all_df = pd.read_csv("..\\dashboard\\all_data.csv")
+all_df = pd.read_csv(data)
 
 all_df = all_df.rename(
     columns={
