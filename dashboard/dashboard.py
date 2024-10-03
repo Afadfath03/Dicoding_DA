@@ -51,13 +51,13 @@ main_df = all_df[
 st.title("DASHBOARD")
 st.subheader("Data Analysis of Bike Sharing")
 
-total_rentals = main_df["total_bikers"].sum()
-st.metric("Total Bikers: ", value=total_rentals)
+total_user = main_df["total_bikers"].sum()
+st.metric("Total Bikers: ", value=total_user)
 
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(
-    all_df["hour"],
-    all_df["total_bikers"],
+    main_df["hour"],
+    main_df["total_bikers"],
     marker="o",
     linewidth=2,
     color="#90CAF9"
@@ -79,7 +79,7 @@ with tab1:
     sns.regplot(
         x='temperature', 
         y='total_bikers', 
-        data=all_df,
+        data=main_df,
         label='Temperature',
         line_kws={'color': 'red'},
         ax=ax)
@@ -91,7 +91,7 @@ with tab2:
     sns.lineplot(
         x='hour', 
         y='total_bikers', 
-        data=all_df,
+        data=main_df,
         color='green',
         ax=ax[0])
     ax[0].tick_params(axis='x', labelsize=15)
@@ -102,7 +102,7 @@ with tab2:
     sns.lineplot(
         x='hour', 
         y='registered_bikers', 
-        data=all_df,
+        data=main_df,
         color='red',
         ax=ax[1])
     ax[1].tick_params(axis='x', labelsize=15)
@@ -113,7 +113,7 @@ with tab2:
     sns.lineplot(
         x='hour', 
         y='casual_bikers', 
-        data=all_df,
+        data=main_df,
         color='blue',
         ax=ax[2])
     ax[2].tick_params(axis='x', labelsize=15)
@@ -128,7 +128,7 @@ with tab3:
     sns.regplot(
         x='humidity', 
         y='total_bikers', 
-        data=all_df,
+        data=main_df,
         color='red',
         line_kws={'color': 'blue'},
         ax=ax)
@@ -143,7 +143,7 @@ with tab4:
     sns.barplot(
         x='weather_situation', 
         y='total_bikers', 
-        data=all_df,
+        data=main_df,
         ax=ax)
     ax.set_xlabel('Weather Situation')
     ax.set_ylabel('Total Bikers')
@@ -152,7 +152,7 @@ with tab4:
 
 with tab5:
     scaler = StandardScaler()
-    df_scaled = scaler.fit_transform(all_df[['total_bikers','registered_bikers', 'casual_bikers', 'temperature', 'humidity', 'wind_speed', 'hour', 'workingday', 'is_holiday']])
+    df_scaled = scaler.fit_transform(main_df[['total_bikers','registered_bikers', 'casual_bikers', 'temperature', 'humidity', 'wind_speed', 'hour', 'workingday', 'is_holiday']])
     df_scaled = pd.DataFrame(df_scaled, columns=['total_bikers','registered_bikers', 'casual_bikers', 'temperature', 'humidity', 'wind_speed', 'hour', 'workingday', 'is_holiday'])
     df_scaled.head()
     
@@ -174,16 +174,16 @@ with tab5:
     
     km = KMeans(n_clusters=4)
     ds_predicted = km.fit_predict(df_scaled[['total_bikers','registered_bikers', 'casual_bikers', 'temperature', 'humidity', 'wind_speed', 'hour', 'workingday', 'is_holiday']])
-    all_df['Enviromental'] = ds_predicted
+    main_df['Enviromental'] = ds_predicted
     
     figcl2, axcl2 = plt.subplots(figsize=(10, 5))
     pca = PCA(n_components=4)
     data_pca = pca.fit_transform(df_scaled[['total_bikers', 'registered_bikers', 'casual_bikers', 'temperature', 'humidity', 'wind_speed', 'hour', 'workingday', 'is_holiday']])
-    axcl2.scatter(data_pca[:, 0], data_pca[:, 1], c=all_df['Enviromental'], cmap='viridis')
+    axcl2.scatter(data_pca[:, 0], data_pca[:, 1], c=main_df['Enviromental'], cmap='viridis')
     axcl2.set_title("Visualisasi Cluster")
     st.pyplot(figcl2)
     
-    cluster_df = all_df.groupby('Enviromental').mean()
+    cluster_df = main_df.groupby('Enviromental').mean()
     
     selected_columns = [
         "hour",
