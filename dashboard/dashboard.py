@@ -45,6 +45,13 @@ with st.sidebar:
         value=[min_date, max_date],
     )
 
+if(start_date is None) or (end_date is None):
+    st.error("Error: Please select a date range.")
+    st.stop()
+    
+if start_date > end_date:
+    st.error("Error: End date must fall after start date.")
+
 main_df = all_df[
     (all_df["date"] >= pd.to_datetime(start_date))
     & (all_df["date"] <= pd.to_datetime(end_date))
