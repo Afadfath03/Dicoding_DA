@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 
 sns.set_theme(style="dark")
 
-all_df = pd.read_csv("./all_data.csv")
+all_df = pd.read_csv("..\\dashboard\\all_data.csv")
 
 all_df = all_df.rename(
     columns={
