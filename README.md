@@ -12,7 +12,7 @@ pip install -r requirement.txt
 
 ``` bash
 mkdir dashboard
-cd dashboardA
+cd dashboard
 pipenv install
 pipenv shell
 pip install -r requirement.txt
