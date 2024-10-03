@@ -39,10 +39,8 @@ max_date = all_df["date"].max()
 
 with st.sidebar:
     start_date, end_date = st.date_input(
-        label="Rentang waktu",
-        min_value=min_date,
-        max_value=max_date,
-        value=[min_date, max_date],
+        "Select Date Range",
+        [min_date, max_date],
     )
 
 main_df = all_df[
@@ -136,7 +134,7 @@ with tab3:
         ax=ax)
     ax.tick_params(axis='x', labelsize=20)
     ax.tick_params(axis='y', labelsize=20)
-    ax.set_xlabel('Hunidity', fontsize=30)
+    ax.set_xlabel('humidity', fontsize=30)
     ax.set_ylabel('Total', fontsize=30)
     st.pyplot(fig)
 
