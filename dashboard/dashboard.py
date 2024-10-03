@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
-data = "all_data.csv"
+data = "dashboard/all_data.csv"
 
 sns.set_theme(style="dark")
 
