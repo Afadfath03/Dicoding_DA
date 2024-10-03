@@ -40,7 +40,9 @@ max_date = all_df["date"].max()
 with st.sidebar:
     start_date, end_date = st.date_input(
         "Select Date Range",
-        [min_date, max_date],
+        min_value=min_date,
+        max_value=max_date,
+        value=[min_date, max_date],
     )
 
 main_df = all_df[
